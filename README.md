@@ -1,1 +1,1 @@
-**Still in development, not suitalble for use**
+**Still in development, not suitable for use**
