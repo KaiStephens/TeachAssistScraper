@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marks Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        .error {
+            color: red;
+            text-align: center;
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mark Results</h1>
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% else %}
+        <h2>Your Courses:</h2>
+        <ul>
+            {% for course in courses %}
+                <li>
+                    <strong>Course:</strong> {{ course.course }}<br>
+                    <strong>Midterm:</strong> {{ course.midterm }}<br>
+                    <strong>Current:</strong> {{ course.current }}
+                </li>
+            {% endfor %}
+        </ul>
+        <h2>Average: {{ average }}%</h2>
+    {% endif %}
+    <a href="/">Back to Login</a>
+</body>
+</html>
