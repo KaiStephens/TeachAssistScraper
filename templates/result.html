@@ -2,63 +2,323 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marks Result</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        html, body {
             margin: 0;
-            padding: 20px;
-            background-color: #f9f9f9;
+            padding: 0;
+            height: 100%;
+        }
+        body {
+            display: flex;      
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #ffffff, #f0f0f0);
             color: #333;
         }
+
         h1, h2 {
             text-align: center;
+            margin: 0;
+            padding: 20px 0;
         }
+
+        .error {
+            color: #333;
+            text-align: center;
+        }
+
+
+        .main-container {
+            flex: 1;           
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: stretch; 
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            box-sizing: border-box;
+            padding: 20px;
+        }
+
+        .content-section {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .courses-header {
+            margin-bottom: 0;
+        }
+
+        .courses-container {
+            flex: 1;
+            overflow-y: auto;
+            max-height: 600px; 
+            margin-top: 10px;
+        }
+
         ul {
             list-style-type: none;
             padding: 0;
+            margin: 0 auto;
+            display: inline-block;
+            text-align: left;
+            width: 100%;
+            box-sizing: border-box;
         }
         li {
-            background: #fff;
+            background: #fafafa;
             margin: 10px 0;
             padding: 15px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
         }
-        .error {
-            color: red;
-            text-align: center;
+        .course {
+            font-weight: bold;
+            margin-bottom: 6px;
         }
-        a {
-            display: block;
-            text-align: center;
+
+        form.adv-form {
+            margin-top: 10px;
+        }
+        .adv-button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 8px 16px;
+            font-size: 0.9em;
+        }
+        .adv-button:hover {
+            background-color: #218838;
+        }
+
+        .adv-button-disabled {
+            background-color: red;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: not-allowed;
+            padding: 8px 16px;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        .back-link {
             margin-top: 20px;
+        }
+        .back-link a {
             color: #007BFF;
             text-decoration: none;
+            font-size: 0.95em;
         }
-        a:hover {
+        .back-link a:hover {
             text-decoration: underline;
+        }
+
+        .chat-section {
+            display: flex;
+            flex-direction: column;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-left: 20px;
+            width: 350px;
+            box-sizing: border-box;
+            height: 850px; 
+        }
+
+        .chat-header {
+            margin: 0 0 10px 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .chat-log {
+            flex: 1;
+            background-color: #fdfdfd;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            overflow-y: auto;     
+            padding: 10px;
+            margin-bottom: 10px;
+            max-height: calc(100% - 120px); 
+        }
+
+        .chat-message {
+            margin: 8px 0;
+            max-width: 80%;
+            padding: 8px;
+            border-radius: 6px;
+            display: inline-block;
+            clear: both;
+        }
+        .chat-message.user {
+            background-color: #007BFF;
+            color: #fff;
+            float: right;
+        }
+        .chat-message.assistant {
+            background-color: #e8e8e8;
+            color: #333;
+            float: left;
+        }
+        .chat-message.system {
+            background-color: #ffe0e0;
+            color: #333;
+            text-align: center;
+            float: none;
+            display: block;
+        }
+
+        .chat-form {
+            display: flex;
+            align-items: center;
+        }
+        .chat-input {
+            flex: 1;
+            padding: 10px;
+            font-size: 1em;
+            margin-right: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .chat-submit {
+            padding: 10px 16px;
+            font-size: 1em;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .chat-submit:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
     <h1>Mark Results</h1>
-    {% if error %}
-        <p class="error">{{ error }}</p>
-    {% else %}
-        <h2>Your Courses:</h2>
-        <ul>
-            {% for course in courses %}
-                <li>
-                    <strong>Course:</strong> {{ course.course }}<br>
-                    <strong>Midterm:</strong> {{ course.midterm }}<br>
-                    <strong>Current:</strong> {{ course.current }}
-                </li>
-            {% endfor %}
-        </ul>
-        <h2>Average: {{ average }}%</h2>
-    {% endif %}
-    <a href="/">Back to Login</a>
+
+    <div class="main-container">
+        <div class="content-section">
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% else %}
+                <h2 class="courses-header">Your Courses</h2>
+                <div class="courses-container">
+                    <ul>
+                        {% for course in courses %}
+                        <li>
+                            <div class="course">{{ course.course }}</div>
+                            <div><strong>Midterm:</strong> {{ course.midterm }}</div>
+                            <div><strong>Current:</strong> {{ course.current }}</div>
+                            
+                            {# If the current mark has a '%' and the link exists, show the normal button.
+                               Otherwise show the disabled red button. #}
+                            {% if course.link and '%' in course.current %}
+                                <form class="adv-form" action="/fetch_advanced_report" method="POST">
+                                    <input type="hidden" name="username" value="{{ username }}">
+                                    <input type="hidden" name="password" value="{{ password }}">
+                                    <input type="hidden" name="advanced_url" value="{{ course.link }}">
+                                    <button class="adv-button" type="submit">View Detailed Report</button>
+                                </form>
+                            {% else %}
+                                <button class="adv-button-disabled" disabled>TA V4 Coming Soon</button>
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <h2>Average: {{ average }}%</h2>
+            {% endif %}
+
+            <div class="back-link">
+                <a href="/">Back to Login</a>
+            </div>
+        </div>
+
+        <div class="chat-section">
+            <h2 class="chat-header">Chat with Teach Assistant</h2>
+
+            <div class="chat-log" id="chatLog"></div>
+
+            <form class="chat-form" id="chatForm">
+                <input
+                    type="text"
+                    class="chat-input"
+                    id="chatInput"
+                    name="chat_message"
+                    placeholder="Type your question..."
+                    required
+                />
+                <button class="chat-submit" type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const chatForm  = document.getElementById('chatForm');
+        const chatLog   = document.getElementById('chatLog');
+        const chatInput = document.getElementById('chatInput');
+
+        chatForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const userMessage = chatInput.value.trim();
+            if (!userMessage) return;
+
+            appendMessage("User", userMessage);
+            chatInput.value = "";
+
+            try {
+                const response = await fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: userMessage })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.status}`);
+                }
+
+                const data = await response.json();
+                appendMessage("Teach Assistant", data.reply);
+
+            } catch (err) {
+                appendMessage("System", "Error: " + err.message);
+            }
+        });
+
+        function appendMessage(sender, message) {
+            const msgDiv = document.createElement('div');
+            msgDiv.classList.add('chat-message');
+
+            if (sender === "User") {
+                msgDiv.classList.add('user');
+            } else if (sender === "Teach Assistant") {
+                msgDiv.classList.add('assistant');
+            } else {
+                msgDiv.classList.add('system');
+            }
+
+            msgDiv.innerHTML = `<strong>${sender}:</strong> ${message}`;
+            chatLog.appendChild(msgDiv);
+
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+    </script>
 </body>
 </html>
