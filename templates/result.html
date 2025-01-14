@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <title>Marks Result</title>
     <style>
+        /* Reset margins for html and body */
         html, body {
             margin: 0;
             padding: 0;
             height: 100%;
         }
+        /* Base styling for body */
         body {
             display: flex;      
             flex-direction: column;
@@ -17,18 +19,20 @@
             color: #333;
         }
 
+        /* Center align headings and set padding */
         h1, h2 {
             text-align: center;
             margin: 0;
             padding: 20px 0;
         }
 
+        /* Styling for error messages */
         .error {
             color: #333;
             text-align: center;
         }
 
-
+        /* Main container styling for layout */
         .main-container {
             flex: 1;           
             display: flex;
@@ -42,6 +46,7 @@
             padding: 20px;
         }
 
+        /* Content section styling similar to previous template */
         .content-section {
             background-color: #fff;
             border: 1px solid #ddd;
@@ -55,10 +60,12 @@
             flex-direction: column;
         }
 
+        /* Header styling for courses section */
         .courses-header {
             margin-bottom: 0;
         }
 
+        /* Scrollable container for courses list */
         .courses-container {
             flex: 1;
             overflow-y: auto;
@@ -66,6 +73,7 @@
             margin-top: 10px;
         }
 
+        /* Styling for list of courses */
         ul {
             list-style-type: none;
             padding: 0;
@@ -75,6 +83,7 @@
             width: 100%;
             box-sizing: border-box;
         }
+        /* Styling for each course list item */
         li {
             background: #fafafa;
             margin: 10px 0;
@@ -82,14 +91,18 @@
             border: 1px solid #ddd;
             border-radius: 6px;
         }
+        
+        /* Bold styling for course name */
         .course {
             font-weight: bold;
             margin-bottom: 6px;
         }
 
+        /* Styling for advanced report form margin */
         form.adv-form {
             margin-top: 10px;
         }
+        /* Styling for advanced report button */
         .adv-button {
             background-color: #28a745;
             color: #fff;
@@ -99,10 +112,12 @@
             padding: 8px 16px;
             font-size: 0.9em;
         }
+        /* Hover effect for advanced report button */
         .adv-button:hover {
             background-color: #218838;
         }
 
+        /* Styling for disabled advanced report button */
         .adv-button-disabled {
             background-color: red;
             color: #fff;
@@ -114,6 +129,7 @@
             margin-top: 10px;
         }
 
+        /* Styling for back link section */
         .back-link {
             margin-top: 20px;
         }
@@ -122,10 +138,12 @@
             text-decoration: none;
             font-size: 0.95em;
         }
+        /* Hover effect for back link */
         .back-link a:hover {
             text-decoration: underline;
         }
 
+        /* --- Chat Section Styles --- */
         .chat-section {
             display: flex;
             flex-direction: column;
@@ -210,9 +228,11 @@
     </style>
 </head>
 <body>
+    <!-- Page heading -->
     <h1>Mark Results</h1>
 
     <div class="main-container">
+        <!-- Section to display course results -->
         <div class="content-section">
             {% if error %}
                 <p class="error">{{ error }}</p>
@@ -226,8 +246,10 @@
                             <div><strong>Midterm:</strong> {{ course.midterm }}</div>
                             <div><strong>Current:</strong> {{ course.current }}</div>
                             
-                            {# If the current mark has a '%' and the link exists, show the normal button.
-                               Otherwise show the disabled red button. #}
+                            {# 
+                               If the current mark has a '%' and the link exists, show the normal button.
+                               Otherwise show the disabled red button.
+                            #}
                             {% if course.link and '%' in course.current %}
                                 <form class="adv-form" action="/fetch_advanced_report" method="POST">
                                     <input type="hidden" name="username" value="{{ username }}">
@@ -251,6 +273,7 @@
             </div>
         </div>
 
+        <!-- Chat section for interaction with Teaching Assistant AI -->
         <div class="chat-section">
             <h2 class="chat-header">Chat with Teach Assistant</h2>
 
@@ -271,19 +294,23 @@
     </div>
 
     <script>
+        // Get references to chat form elements
         const chatForm  = document.getElementById('chatForm');
         const chatLog   = document.getElementById('chatLog');
         const chatInput = document.getElementById('chatInput');
 
+        // Add submit event listener to handle chat messages
         chatForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             const userMessage = chatInput.value.trim();
             if (!userMessage) return;
 
+            // Add user's message to chat log
             appendMessage("User", userMessage);
             chatInput.value = "";
 
             try {
+                // Send user's message to server via POST /chat endpoint
                 const response = await fetch('/chat', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -295,17 +322,21 @@
                 }
 
                 const data = await response.json();
+                // Append assistant's reply to chat log
                 appendMessage("Teach Assistant", data.reply);
 
             } catch (err) {
+                // On error, display system message in chat log
                 appendMessage("System", "Error: " + err.message);
             }
         });
 
+        // Function to append a new message to the chat log
         function appendMessage(sender, message) {
             const msgDiv = document.createElement('div');
             msgDiv.classList.add('chat-message');
 
+            // Apply styling based on sender type
             if (sender === "User") {
                 msgDiv.classList.add('user');
             } else if (sender === "Teach Assistant") {
@@ -317,6 +348,7 @@
             msgDiv.innerHTML = `<strong>${sender}:</strong> ${message}`;
             chatLog.appendChild(msgDiv);
 
+            // Scroll chat log to the bottom
             chatLog.scrollTop = chatLog.scrollHeight;
         }
     </script>
