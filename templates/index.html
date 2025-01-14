@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YRDSB Mark Fetcher</title>
     <style>
         body {
@@ -14,7 +13,7 @@
         }
         form {
             max-width: 400px;
-            margin: 50px auto;
+            margin: 40px auto;
             padding: 20px;
             background: #fff;
             border: 1px solid #ccc;
@@ -41,14 +40,13 @@
         button:hover {
             background: #0056b3;
         }
-        .title {
-            position: relative;
-            left: 40%;
+        h1 {
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <h1 class="title">YRDSB Mark Fetcher</h1>
+    <h1>YRDSB Mark Fetcher</h1>
     <form action="/fetch_marks" method="POST">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
