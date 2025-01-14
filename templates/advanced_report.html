@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Advanced Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .overall {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 1.2em;
+        }
+        .accordion-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .assignment-header {
+            background: #fff;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 12px;
+            font-weight: bold;
+            position: relative;
+            transition: background-color 0.2s;
+        }
+        .assignment-header:hover {
+            background-color: #eee;
+        }
+        .assignment-header::after {
+            content: "▼";
+            position: absolute;
+            right: 16px;
+            font-size: 14px;
+            transition: transform 0.3s;
+        }
+        .assignment-header.active::after {
+            transform: rotate(-180deg);
+        }
+
+        .assignment-content {
+            display: none;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            padding: 0 10px 10px;
+        }
+        .assignment-content table {
+            width: 100%;
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+        .assignment-content th,
+        .assignment-content td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .back-link button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .back-link button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Advanced Report</h1>
+
+    <div class="accordion-container">
+        {% for item in assignments %}
+            <div class="assignment-header" onclick="toggleAccordion(this)">
+                {{ item.name }}
+                {% if item.overall %}
+                    - {{ item.overall }}%
+                {% endif %}
+            </div>
+            <div class="assignment-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Knowledge</th>
+                            <th>Thinking</th>
+                            <th>Communication</th>
+                            <th>Application</th>
+                            <th>Other/Culminating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ item.knowledge }}</td>
+                            <td>{{ item.thinking }}</td>
+                            <td>{{ item.communication }}</td>
+                            <td>{{ item.application }}</td>
+                            <td>{{ item.culminating }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if overall %}
+        <p class="overall"><strong>Overall Mark:</strong> {{ overall }}</p>
+    {% endif %}
+
+    <div class="back-link">
+        <form action="/fetch_marks" method="POST">
+            <input type="hidden" name="username" value="{{ username }}">
+            <input type="hidden" name="password" value="{{ password }}">
+            <button type="submit">Back to Classes</button>
+        </form>
+    </div>
+
+    <script>
+    function toggleAccordion(headerEl) {
+        headerEl.classList.toggle("active");
+        const contentEl = headerEl.nextElementSibling;
+        if (contentEl.style.display === "block") {
+            contentEl.style.display = "none";
+        } else {
+            contentEl.style.display = "block";
+        }
+    }
+    </script>
+</body>
+</html>
