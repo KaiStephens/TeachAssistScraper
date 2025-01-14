@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>YRDSB Mark Fetcher</title>
     <style>
+        /* Basic styling */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -11,6 +12,7 @@
             background-color: #f9f9f9;
             color: #333;
         }
+        /* Styling for the form */
         form {
             max-width: 400px;
             margin: 40px auto;
@@ -19,15 +21,18 @@
             border: 1px solid #ccc;
             border-radius: 8px;
         }
+        /* Bold text for labels */
         label {
             font-weight: bold;
         }
+        /* Styling for input fields */
         input {
             width: 100%;
             padding: 8px;
             margin: 10px 0;
             box-sizing: border-box;
         }
+        /* Styling for the submit button */
         button {
             width: 100%;
             padding: 10px;
@@ -37,23 +42,30 @@
             border-radius: 4px;
             cursor: pointer;
         }
+        /* Hover effect for the button */
         button:hover {
             background: #0056b3;
         }
+        /* Align the heading */
         h1 {
             text-align: center;
         }
     </style>
 </head>
 <body>
+    <!-- Page heading -->
     <h1>YRDSB Mark Fetcher</h1>
+    <!-- Form for user to input credentials and fetch marks -->
     <form action="/fetch_marks" method="POST">
+        <!-- Username field -->
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
 
+        <!-- Password field -->
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
 
+        <!-- Submit button to fetch marks -->
         <button type="submit">Fetch Marks</button>
     </form>
 </body>
