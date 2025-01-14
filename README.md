@@ -36,8 +36,8 @@ The application provides the following functionalities:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/yrdsb-mark-fetcher.git
-   cd yrdsb-mark-fetcher
+   git clone https://github.com/KaiStephens/TeachAssistScraper
+   cd TeachAssistScraper
 
 2. **Set up a virtual environment (optional but recommended):**
     ```bash
