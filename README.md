@@ -18,7 +18,7 @@ The application provides the following functionalities:
   Utilizes `requests` and `BeautifulSoup` to scrape and parse HTML from the YRDSB website for marks and assignment reports.
 
 - **Local Data Storage:**  
-  Stores fetched data in a JSON file (`user_marks.json`) for persistence between sessions.
+  Stores fetched data in a JSON file (`user_marks.json`)
 
 - **AI Integration:**  
   Incorporates Google GenAI to create an interactive chat experience, providing responses based on user input and fetched data.
