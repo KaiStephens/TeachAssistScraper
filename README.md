@@ -49,7 +49,12 @@ The application provides the following functionalities:
     pip install -r requirements.txt
     ```
     
-4. **Configure necessary environment variables:** Set your Flask secret key and any credentials for Google GenAI as environment variables or in a secure configuration file.
+4. **If planning on using AI use** If you run that AI app without setting your google API key in your environment it will return a server error. To set your google API key run this command:
+
+   ```bash
+    export GOOGLE_API_KEY="YOUR_API_KEY"
+    ```
+   If you do not have an api get one at https://aistudio.google.com/u/1/apikey free of charge (as of 01/14/25)
 
 # Running the Application
 Start the Flask server by running:
