@@ -63,4 +63,10 @@ Start the Flask server by running:
     python app.py
   ```
 
+Or run the app without the AI Assistant with
+
+  ```bash
+    python appNoAI.py
+  ```
+
 By default, the application will run on your local network and locally on http://{your_ip}:5001 and http://127.0.0.1:5001. Open this URL in your web browser to access the application.
