@@ -5,8 +5,8 @@ This repository contains a Flask-based web application designed to help students
 ## Overview
 
 The application provides the following functionalities:
-- **Fetch Marks:** Log in with your YRDSB credentials to retrieve current and midterm marks for your courses.
-- **Advanced Reports:** View a detailed breakdown of assignment marks across various categories such as Knowledge, Thinking, Communication, Application, and Culminating.
+- **Fetch Marks:** Log in with your YRDSB credentials to get current and midterm marks for your courses.
+- **Advanced Reports:** View a detailed breakdown of assignment marks and see your Knowledge, Thinking, Communication, Application, and Culminating marks with weighting.
 - **AI Chat Assistant:** Engage in a chat with an AI teaching assistant that can answer questions and offer guidance based on your mark data, using Google’s GenAI services.
 
 ## Features
