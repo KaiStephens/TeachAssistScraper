@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <title>Marks Result</title>
     <style>
+        /* Set styling html and body */
         html, body {
             margin: 0;
             padding: 0;
             height: 100%;
         }
+        /* Basic styling for the body */
         body {
             display: flex;     
             flex-direction: column;
@@ -17,17 +19,20 @@
             color: #333;
         }
 
+        /* Centered headings styling */
         h1, h2 {
             text-align: center;
             margin: 0;
             padding: 20px 0;
         }
 
+        /* Styling for error messages */
         .error {
             color: #333;
             text-align: center;
         }
 
+        /* Main container styling */
         .main-container {
             flex: 1;                   
             display: flex;
@@ -41,6 +46,7 @@
             padding: 20px;
         }
 
+        /* Styling for the content section */
         .content-section {
             background-color: #fff;
             border: 1px solid #ddd;
@@ -54,10 +60,12 @@
             flex-direction: column;
         }
 
+        /* Header styling for courses section */
         .courses-header {
             margin-bottom: 0;
         }
 
+        /* Container for courses list */
         .courses-container {
             flex: 1;
             overflow-y: auto;
@@ -65,6 +73,7 @@
             margin-top: 10px;
         }
 
+        /* Styling for list of courses */
         ul {
             list-style-type: none;
             padding: 0;
@@ -74,6 +83,7 @@
             width: 100%;
             box-sizing: border-box;
         }
+        /* Styling for each list item (course) */
         li {
             background: #fafafa;
             margin: 10px 0;
@@ -81,14 +91,17 @@
             border: 1px solid #ddd;
             border-radius: 6px;
         }
+        /* Bold course name styling */
         .course {
             font-weight: bold;
             margin-bottom: 6px;
         }
 
+        /* Styling for advanced report form */
         form.adv-form {
             margin-top: 10px;
         }
+        /* Styling for advanced report button */
         .adv-button {
             background-color: #28a745;
             color: #fff;
@@ -98,10 +111,12 @@
             padding: 8px 16px;
             font-size: 0.9em;
         }
+        /* Hover effect for advanced report button */
         .adv-button:hover {
             background-color: #218838;
         }
 
+        /* Styling for disabled advanced report button */
         .adv-button-disabled {
             background-color: red;
             color: #fff;
@@ -113,6 +128,7 @@
             margin-top: 10px;
         }
 
+        /* Styling for back link section */
         .back-link {
             margin-top: 20px;
         }
@@ -121,6 +137,7 @@
             text-decoration: none;
             font-size: 0.95em;
         }
+        /* Hover effect for back link */
         .back-link a:hover {
             text-decoration: underline;
         }
@@ -128,25 +145,32 @@
     </style>
 </head>
 <body>
+    <!-- Page heading -->
     <h1>Mark Results</h1>
 
     <div class="main-container">
         <div class="content-section">
+            <!-- If there's an error, display error message -->
             {% if error %}
                 <p class="error">{{ error }}</p>
             {% else %}
+                <!-- Otherwise display courses list -->
                 <h2 class="courses-header">Your Courses</h2>
                 <div class="courses-container">
                     <ul>
+                        <!-- Loop through each course and display details -->
                         {% for course in courses %}
                         <li>
                             <div class="course">{{ course.course }}</div>
                             <div><strong>Midterm:</strong> {{ course.midterm }}</div>
                             <div><strong>Current:</strong> {{ course.current }}</div>
                             
-                            {# If the current mark has a '%' and the link exists, show the normal button.
-                               Otherwise show the disabled red button. #}
+                            {# 
+                              If the current mark has a '%' and the link exists, show the normal button.
+                              Otherwise show the disabled red button.
+                            #}
                             {% if course.link and '%' in course.current %}
+                                <!-- Form to fetch advanced report for the course -->
                                 <form class="adv-form" action="/fetch_advanced_report" method="POST">
                                     <input type="hidden" name="username" value="{{ username }}">
                                     <input type="hidden" name="password" value="{{ password }}">
@@ -154,6 +178,7 @@
                                     <button class="adv-button" type="submit">View Detailed Report</button>
                                 </form>
                             {% else %}
+                                <!-- Disabled button when no detailed report is available -->
                                 <button class="adv-button-disabled" disabled>TA V4 Coming Soon</button>
                             {% endif %}
                         </li>
@@ -161,9 +186,11 @@
                     </ul>
                 </div>
 
+                <!-- Display average mark -->
                 <h2>Average: {{ average }}%</h2>
             {% endif %}
 
+            <!-- Back to login link -->
             <div class="back-link">
                 <a href="/">Back to Login</a>
             </div>
