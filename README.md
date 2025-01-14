@@ -59,7 +59,8 @@ The application provides the following functionalities:
 # Running the Application
 Start the Flask server by running:
 
-    ```bash
+  ```bash
     python app.py
-    ```
-By default, the application will run on http://0.0.0.0:5001. Open this URL in your web browser to access the application.
+  ```
+
+By default, the application will run on your local network and locally on http://{your_ip}:5001 and http://127.0.0.1:5001. Open this URL in your web browser to access the application.
