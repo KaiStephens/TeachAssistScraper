@@ -2,18 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Responsive viewport tag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marks Result</title>
     <style>
-        /* Set styling html and body */
+        /* Reset margins, paddings, and ensure no horizontal overflow */
         html, body {
             margin: 0;
             padding: 0;
-            height: 100%;
-        }
-        /* Basic styling for the body */
-        body {
-            display: flex;     
-            flex-direction: column;
+            overflow-x: hidden;
             font-family: Arial, sans-serif;
             background: linear-gradient(to bottom, #ffffff, #f0f0f0);
             color: #333;
@@ -32,21 +29,16 @@
             text-align: center;
         }
 
-        /* Main container styling */
+        /* Fluid main container */
         .main-container {
-            flex: 1;                   
             display: flex;
-            flex-direction: row;
             justify-content: center;
-            align-items: stretch;      
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
-            box-sizing: border-box;
             padding: 20px;
+            width: 100%;
+            box-sizing: border-box;
         }
 
-        /* Styling for the content section */
+        /* Fluid content section */
         .content-section {
             background-color: #fff;
             border: 1px solid #ddd;
@@ -54,10 +46,9 @@
             padding: 20px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             text-align: center;
-            max-width: 600px;
             width: 100%;
-            display: flex;
-            flex-direction: column;
+            max-width: 600px;
+            box-sizing: border-box;
         }
 
         /* Header styling for courses section */
@@ -67,7 +58,6 @@
 
         /* Container for courses list */
         .courses-container {
-            flex: 1;
             overflow-y: auto;
             max-height: 600px; 
             margin-top: 10px;
@@ -77,12 +67,12 @@
         ul {
             list-style-type: none;
             padding: 0;
-            margin: 0 auto;
-            display: inline-block;
+            margin: 0;
             text-align: left;
             width: 100%;
             box-sizing: border-box;
         }
+
         /* Styling for each list item (course) */
         li {
             background: #fafafa;
@@ -90,7 +80,9 @@
             padding: 15px;
             border: 1px solid #ddd;
             border-radius: 6px;
+            box-sizing: border-box;
         }
+
         /* Bold course name styling */
         .course {
             font-weight: bold;
@@ -101,6 +93,7 @@
         form.adv-form {
             margin-top: 10px;
         }
+
         /* Styling for advanced report button */
         .adv-button {
             background-color: #28a745;
@@ -111,7 +104,6 @@
             padding: 8px 16px;
             font-size: 0.9em;
         }
-        /* Hover effect for advanced report button */
         .adv-button:hover {
             background-color: #218838;
         }
@@ -137,11 +129,27 @@
             text-decoration: none;
             font-size: 0.95em;
         }
-        /* Hover effect for back link */
         .back-link a:hover {
             text-decoration: underline;
         }
 
+        @media (max-width: 600px) {
+            h1, h2 {
+                font-size: 1.2em;
+                padding: 10px 0;
+            }
+            .content-section {
+                padding: 10px;
+            }
+            li {
+                padding: 10px;
+                margin: 5px 0;
+            }
+            .adv-button, .adv-button-disabled {
+                padding: 6px 12px;
+                font-size: 0.8em;
+            }
+        }
     </style>
 </head>
 <body>
