@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Added viewport meta tag for responsive behavior -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marks Result</title>
     <style>
         /* Reset margins for html and body */
@@ -224,6 +226,35 @@
         }
         .chat-submit:hover {
             background-color: #0056b3;
+        }
+
+        /* Responsive adjustments for screens less than 600px */
+        @media (max-width: 600px) {
+            .main-container {
+                flex-direction: column;
+                padding: 10px;
+            }
+            .content-section {
+                max-width: 100%;
+                margin: 0;
+                padding: 15px;
+            }
+            .chat-section {
+                width: 100%;
+                margin-left: 0;
+                margin-top: 20px;
+                height: auto;
+            }
+            .chat-log {
+                max-height: 300px;
+            }
+            h1, h2 {
+                font-size: 1.5em;
+                padding: 10px 0;
+            }
+            ul, li, .adv-button, .adv-button-disabled {
+                font-size: 1em;
+            }
         }
     </style>
 </head>
