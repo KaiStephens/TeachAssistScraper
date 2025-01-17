@@ -1,172 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Advanced Report</title>
-    <style>
-        /* Basic styles for body and overall layout */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 20px;
-        }
-        /* Centered heading style */
-        h1 {
-            text-align: center;
-        }
-        /* Overall mark text styling */
-        .overall {
-            text-align: center;
-            margin-top: 10px;
-            font-size: 1.2em;
-        }
-        /* Container */
-        .accordion-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
+  <meta charset="UTF-8">
+  <title>Advanced Report</title>
+  <style>
+    /* Basic styles for body */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      color: #000;        
+      margin: 0;
+      padding: 20px;
+    }
 
-        /* Styling for each assignment header */
-        .assignment-header {
-            background: #fff;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            cursor: pointer;
-            padding: 12px;
-            font-weight: bold;
-            position: relative;
-            transition: background-color 0.2s;
-        }
-        /* Hover effect for assignment headers */
-        .assignment-header:hover {
-            background-color: #eee;
-        }
-        /* Arrow indicator for headers */
-        .assignment-header::after {
-            content: "▼";
-            position: absolute;
-            right: 16px;
-            font-size: 14px;
-            transition: transform 0.3s;
-        }
-        /* Rotate arrow when header is open */
-        .assignment-header.active::after {
-            transform: rotate(-180deg);
-        }
+    /* Centered heading style*/
+    h1 {
+      text-align: center;
+      position: relative;
+      margin: 0;
+      padding: 20px 0;
+    }
+    h1::after {
+      content: '';
+      display: block;
+      width: 50%;
+      height: 4px;
+      background-color: #FFD700;
+      margin: 8px auto 0;
+    }
 
-        /* Hidden content for each assignment */
-        .assignment-content {
-            display: none;
-            overflow: hidden;
-            background: #fff;
-            border: 1px solid #ccc;
-            border-top: none;
-            border-radius: 0 0 4px 4px;
-            padding: 0 10px 10px;
-        }
-        
-        /* Styling for table inside assignment content */
-        .assignment-content table {
-            width: 100%;
-            margin-top: 10px;
-            border-collapse: collapse;
-        }
-        .assignment-content th,
-        .assignment-content td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: center;
-        }
-        /* Back link container styling */
-        .back-link {
-            text-align: center;
-            margin-top: 20px;
-        }
-        /* Back button styling */
-        .back-link button {
-            background-color: #007BFF;
-            color: #fff;
-            padding: 8px 16px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        /* Hover effect for back button */
-        .back-link button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    /* Overall mark text styling */
+    .overall {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 1.2em;
+    }
+
+    /* Container */
+    .accordion-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Styling for each assignment header */
+    .assignment-header {
+      background: #fff;
+      margin: 10px 0;
+      border: 1px solid #000; 
+      border-radius: 4px;
+      cursor: pointer;
+      padding: 12px;
+      font-weight: bold;
+      position: relative;
+      transition: background-color 0.2s;
+    }
+    /* Hover effect for assignment headers */
+    .assignment-header:hover {
+      background-color: #f0f0f0;
+    }
+    /* Arrow indicator for headers */
+    .assignment-header::after {
+      content: "▼";
+      position: absolute;
+      right: 16px;
+      font-size: 14px;
+      color: #FFD700; 
+      transition: transform 0.3s;
+    }
+    /* Rotate arrow when header is open */
+    .assignment-header.active::after {
+      transform: rotate(-180deg);
+    }
+
+    /* Hidden content for each assignment */
+    .assignment-content {
+      display: none;
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid #000; 
+      border-top: none;
+      border-radius: 0 0 4px 4px;
+      padding: 0 10px 10px;
+    }
+    
+    /* Styling for table inside assignment content */
+    .assignment-content table {
+      width: 100%;
+      margin-top: 10px;
+      border-collapse: collapse;
+    }
+    .assignment-content th,
+    .assignment-content td {
+      border: 1px solid #000; 
+      padding: 8px;
+      text-align: center;
+    }
+
+    /* Back link container styling */
+    .back-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+    /* Back button styling */
+    .back-link button {
+      background-color: #FFD700; 
+      color: #000;           
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    /* Hover effect for back button */
+    .back-link button:hover {
+      background-color: #b8860b; 
+    }
+  </style>
 </head>
 <body>
-    <!-- Main heading for the advanced report page -->
-    <h1>Advanced Report</h1>
+  <!-- Main heading for the advanced report page -->
+  <h1>Advanced Report</h1>
 
-    <div class="accordion-container">
-        <!-- Loop through each assignment item to create sections -->
-        {% for item in assignments %}
-            <!-- Clickable header for each assignment -->
-            <div class="assignment-header" onclick="toggleAccordion(this)">
-                {{ item.name }}
-                {% if item.overall %}
-                    - {{ item.overall }}%
-                {% endif %}
-            </div>
-            <!-- Hidden content section for assignment details -->
-            <div class="assignment-content">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Knowledge</th>
-                            <th>Thinking</th>
-                            <th>Communication</th>
-                            <th>Application</th>
-                            <th>Other/Culminating</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{{ item.knowledge }}</td>
-                            <td>{{ item.thinking }}</td>
-                            <td>{{ item.communication }}</td>
-                            <td>{{ item.application }}</td>
-                            <td>{{ item.culminating }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        {% endfor %}
-    </div>
+  <div class="accordion-container">
+    <!-- Loop through each assignment item to create sections -->
+    {% for item in assignments %}
+      <!-- Clickable header for each assignment -->
+      <div class="assignment-header" onclick="toggleAccordion(this)">
+        {{ item.name }}
+        {% if item.overall %}
+          - {{ item.overall }}%
+        {% endif %}
+      </div>
+      <!-- Hidden content section for assignment details -->
+      <div class="assignment-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Knowledge</th>
+              <th>Thinking</th>
+              <th>Communication</th>
+              <th>Application</th>
+              <th>Other/Culminating</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ item.knowledge }}</td>
+              <td>{{ item.thinking }}</td>
+              <td>{{ item.communication }}</td>
+              <td>{{ item.application }}</td>
+              <td>{{ item.culminating }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    {% endfor %}
+  </div>
 
-    <!-- Display overall mark if available -->
-    {% if overall %}
-        <p class="overall"><strong>Overall Mark:</strong> {{ overall }}</p>
-    {% endif %}
+  <!-- Display overall mark if available -->
+  {% if overall %}
+    <p class="overall"><strong>Overall Mark:</strong> {{ overall }}</p>
+  {% endif %}
 
-    <!-- Back button form to return to classes page -->
-    <div class="back-link">
-        <form action="/fetch_marks" method="POST">
-            <input type="hidden" name="username" value="{{ username }}">
-            <input type="hidden" name="password" value="{{ password }}">
-            <button type="submit">Back to Classes</button>
-        </form>
-    </div>
+  <!-- Back button form to return to classes page -->
+  <div class="back-link">
+    <form action="/fetch_marks" method="POST">
+      <input type="hidden" name="username" value="{{ username }}">
+      <input type="hidden" name="password" value="{{ password }}">
+      <button type="submit">Back to Classes</button>
+    </form>
+  </div>
 
-    <script>
+  <script>
     // Function to toggle the visibility of content sections
     function toggleAccordion(headerEl) {
-        // Toggle 'active' class on header to rotate arrow
-        headerEl.classList.toggle("active");
-        // Get the content element
-        const contentEl = headerEl.nextElementSibling;
-        // Toggle display style between block and none
-        if (contentEl.style.display === "block") {
-            contentEl.style.display = "none";
-        } else {
-            contentEl.style.display = "block";
-        }
+      // Toggle 'active' class on header to rotate arrow
+      headerEl.classList.toggle("active");
+      // Get the content element
+      const contentEl = headerEl.nextElementSibling;
+      // Toggle display style between block and none
+      if (contentEl.style.display === "block") {
+        contentEl.style.display = "none";
+      } else {
+        contentEl.style.display = "block";
+      }
     }
-    </script>
+  </script>
 </body>
 </html>
