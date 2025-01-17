@@ -1,387 +1,402 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <!-- Added viewport meta tag for responsive behavior -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marks Result</title>
-    <style>
-        /* Reset margins for html and body */
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-        }
-        /* Base styling for body */
-        body {
-            display: flex;      
-            flex-direction: column;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, #ffffff, #f0f0f0);
-            color: #333;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marks Result</title>
+  <style>
+    /* Reset margins */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
 
-        /* Center align headings and set padding */
-        h1, h2 {
-            text-align: center;
-            margin: 0;
-            padding: 20px 0;
-        }
+    /* Base styling for body */
+    body {
+      display: flex;      
+      flex-direction: column;
+      font-family: Arial, sans-serif;
+      background: #fff;      
+      color: #000;        
+    }
 
-        /* Styling for error messages */
-        .error {
-            color: #333;
-            text-align: center;
-        }
+    /* Center align headings and set padding */
+    h1, h2 {
+      text-align: center;
+      margin: 0;
+      padding: 20px 0;
+    }
 
-        /* Main container styling for layout */
-        .main-container {
-            flex: 1;           
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: stretch; 
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
-            box-sizing: border-box;
-            padding: 20px;
-        }
+    /* Underline main heading with gold accent */
+    h1 {
+      position: relative;
+      color: #000;
+    }
+    h1::after {
+      content: '';
+      display: block;
+      width: 50%;
+      height: 4px;
+      background-color: #FFD700;
+      margin: 8px auto 0;    
+    }
 
-        /* Content section styling similar to previous template */
-        .content-section {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 600px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-        }
+    /* Styling for error messages */
+    .error {
+      color: #000;
+      text-align: center;
+    }
 
-        /* Header styling for courses section */
-        .courses-header {
-            margin-bottom: 0;
-        }
+    /* Main container styling for layout */
+    .main-container {
+      flex: 1;           
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: stretch; 
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      box-sizing: border-box;
+      padding: 20px;
+    }
 
-        /* Scrollable container for courses list */
-        .courses-container {
-            flex: 1;
-            overflow-y: auto;
-            max-height: 600px; 
-            margin-top: 10px;
-        }
+    /* Content section styling */
+    .content-section {
+      background-color: #fff;
+      border: 2px solid #000;
+      border-radius: 6px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
 
-        /* Styling for list of courses */
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0 auto;
-            display: inline-block;
-            text-align: left;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        /* Styling for each course list item */
-        li {
-            background: #fafafa;
-            margin: 10px 0;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-        }
-        
-        /* Bold styling for course name */
-        .course {
-            font-weight: bold;
-            margin-bottom: 6px;
-        }
+    /* Header styling for courses section */
+    .courses-header {
+      margin-bottom: 0;
+    }
 
-        /* Styling for advanced report form margin */
-        form.adv-form {
-            margin-top: 10px;
-        }
-        /* Styling for advanced report button */
-        .adv-button {
-            background-color: #28a745;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            padding: 8px 16px;
-            font-size: 0.9em;
-        }
-        /* Hover effect for advanced report button */
-        .adv-button:hover {
-            background-color: #218838;
-        }
+    /* Scrollable container for courses list */
+    .courses-container {
+      flex: 1;
+      overflow-y: auto;
+      max-height: 600px; 
+      margin-top: 10px;
+    }
 
-        /* Styling for disabled advanced report button */
-        .adv-button-disabled {
-            background-color: red;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: not-allowed;
-            padding: 8px 16px;
-            font-size: 0.9em;
-            margin-top: 10px;
-        }
+    /* Styling for list of courses */
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0 auto;
+      display: inline-block;
+      text-align: left;
+      width: 100%;
+      box-sizing: border-box;
+    }
 
-        /* Styling for back link section */
-        .back-link {
-            margin-top: 20px;
-        }
-        .back-link a {
-            color: #007BFF;
-            text-decoration: none;
-            font-size: 0.95em;
-        }
-        /* Hover effect for back link */
-        .back-link a:hover {
-            text-decoration: underline;
-        }
+    /* Styling for each course */
+    li {
+      background: #fafafa;
+      margin: 10px 0;
+      padding: 15px;
+      border: 1px solid #000; 
+      border-radius: 6px;
+    }
 
-        /* --- Chat Section Styles --- */
-        .chat-section {
-            display: flex;
-            flex-direction: column;
-            background-color: #ffffff;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-left: 20px;
-            width: 350px;
-            box-sizing: border-box;
-            height: 850px; 
-        }
+    /* Bold styling for course name */
+    .course {
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
 
-        .chat-header {
-            margin: 0 0 10px 0;
-            padding: 0;
-            text-align: center;
-        }
+    /* Styling for advanced report form margin */
+    form.adv-form {
+      margin-top: 10px;
+    }
 
-        .chat-log {
-            flex: 1;
-            background-color: #fdfdfd;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            overflow-y: auto;     
-            padding: 10px;
-            margin-bottom: 10px;
-            max-height: calc(100% - 120px); 
-        }
+    /* Styling for advanced report button */
+    .adv-button {
+      background-color: #FFD700;
+      color: #000;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      padding: 8px 16px;
+      font-size: 0.9em;
+      transition: background-color 0.3s;
+    }
+    .adv-button:hover {
+      background-color: #b8860b;
+    }
 
-        .chat-message {
-            margin: 8px 0;
-            max-width: 80%;
-            padding: 8px;
-            border-radius: 6px;
-            display: inline-block;
-            clear: both;
-        }
-        .chat-message.user {
-            background-color: #007BFF;
-            color: #fff;
-            float: right;
-        }
-        .chat-message.assistant {
-            background-color: #e8e8e8;
-            color: #333;
-            float: left;
-        }
-        .chat-message.system {
-            background-color: #ffe0e0;
-            color: #333;
-            text-align: center;
-            float: none;
-            display: block;
-        }
+    /* Styling for disabled advanced report button */
+    .adv-button-disabled {
+      background-color: red;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: not-allowed;
+      padding: 8px 16px;
+      font-size: 0.9em;
+      margin-top: 10px;
+    }
 
-        .chat-form {
-            display: flex;
-            align-items: center;
-        }
-        .chat-input {
-            flex: 1;
-            padding: 10px;
-            font-size: 1em;
-            margin-right: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .chat-submit {
-            padding: 10px 16px;
-            font-size: 1em;
-            background-color: #007BFF;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .chat-submit:hover {
-            background-color: #0056b3;
-        }
+    /* Styling for back link section */
+    .back-link {
+      margin-top: 20px;
+    }
+    .back-link a {
+      color: #0000EE; 
+      text-decoration: none;
+      font-size: 0.95em;
+    }
+    .back-link a:hover {
+      text-decoration: underline;
+    }
 
-        /* Adjustments for screens less than 600px */
-        @media (max-width: 600px) {
-            .main-container {
-                flex-direction: column;
-                padding: 10px;
-            }
-            .content-section {
-                max-width: 100%;
-                margin: 0;
-                padding: 15px;
-            }
-            .chat-section {
-                width: 100%;
-                margin-left: 0;
-                margin-top: 20px;
-                height: auto;
-            }
-            .chat-log {
-                max-height: 300px;
-            }
-            h1, h2 {
-                font-size: 1.5em;
-                padding: 10px 0;
-            }
-            ul, li, .adv-button, .adv-button-disabled {
-                font-size: 1em;
-            }
-        }
-    </style>
+    /* Chat Section Styles  */
+    .chat-section {
+      display: flex;
+      flex-direction: column;
+      background-color: #fff;
+      border: 2px solid #000;
+      border-radius: 6px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      margin-left: 20px;
+      width: 350px;
+      box-sizing: border-box;
+      height: 850px; 
+    }
+
+    .chat-header {
+      margin: 0 0 10px 0;
+      padding: 0;
+      text-align: center;
+      color: #000;
+    }
+
+    .chat-log {
+      flex: 1;
+      background-color: #fdfdfd;
+      border: 1px solid #000; 
+      border-radius: 6px;
+      overflow-y: auto;     
+      padding: 10px;
+      margin-bottom: 10px;
+      max-height: calc(100% - 120px); 
+      color: #000;
+    }
+
+    .chat-message {
+      margin: 8px 0;
+      max-width: 80%;
+      padding: 8px;
+      border-radius: 6px;
+      display: inline-block;
+      clear: both;
+    }
+    .chat-message.user {
+      background-color: #FFD700; 
+      color: #000;
+      float: right;
+    }
+    .chat-message.assistant {
+      background-color: #e8e8e8;
+      color: #000;
+      float: left;
+    }
+    .chat-message.system {
+      background-color: #ffe0e0;
+      color: #000;
+      text-align: center;
+      float: none;
+      display: block;
+    }
+
+    .chat-form {
+      display: flex;
+      align-items: center;
+    }
+    .chat-input {
+      flex: 1;
+      padding: 10px;
+      font-size: 1em;
+      margin-right: 8px;
+      border: 1px solid #000;
+      border-radius: 4px;
+      color: #000;
+    }
+    .chat-submit {
+      padding: 10px 16px;
+      font-size: 1em;
+      background-color: #FFD700;
+      color: #000;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .chat-submit:hover {
+      background-color: #b8860b;
+    }
+
+    /* Adjustments for screens less than 600px */
+    @media (max-width: 600px) {
+      .main-container {
+        flex-direction: column;
+        padding: 10px;
+      }
+      .content-section {
+        max-width: 100%;
+        margin: 0;
+        padding: 15px;
+      }
+      .chat-section {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 20px;
+        height: auto;
+      }
+      .chat-log {
+        max-height: 300px;
+      }
+      h1, h2 {
+        font-size: 1.5em;
+        padding: 10px 0;
+      }
+      ul, li, .adv-button, .adv-button-disabled {
+        font-size: 1em;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Page heading -->
-    <h1>Mark Results</h1>
+  <!-- Page heading -->
+  <h1>Mark Results</h1>
 
-    <div class="main-container">
-        <!-- Section to display course results -->
-        <div class="content-section">
-            {% if error %}
-                <p class="error">{{ error }}</p>
-            {% else %}
-                <h2 class="courses-header">Your Courses</h2>
-                <div class="courses-container">
-                    <ul>
-                        {% for course in courses %}
-                        <li>
-                            <div class="course">{{ course.course }}</div>
-                            <div><strong>Midterm:</strong> {{ course.midterm }}</div>
-                            <div><strong>Current:</strong> {{ course.current }}</div>
-                            
-                            {# 
-                               If the current mark has a '%' and the link exists, show the normal button.
-                               Otherwise show the disabled red button.
-                            #}
-                            {% if course.link and '%' in course.current %}
-                                <form class="adv-form" action="/fetch_advanced_report" method="POST">
-                                    <input type="hidden" name="username" value="{{ username }}">
-                                    <input type="hidden" name="password" value="{{ password }}">
-                                    <input type="hidden" name="advanced_url" value="{{ course.link }}">
-                                    <button class="adv-button" type="submit">View Detailed Report</button>
-                                </form>
-                            {% else %}
-                                <button class="adv-button-disabled" disabled>TA V4 Coming Soon</button>
-                            {% endif %}
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-
-                <h2>Average: {{ average }}%</h2>
-            {% endif %}
-
-            <div class="back-link">
-                <a href="/">Back to Login</a>
-            </div>
+  <div class="main-container">
+    <!-- Section to display course results -->
+    <div class="content-section">
+      {% if error %}
+        <p class="error">{{ error }}</p>
+      {% else %}
+        <h2 class="courses-header">Your Courses</h2>
+        <div class="courses-container">
+          <ul>
+            {% for course in courses %}
+            <li>
+              <div class="course">{{ course.course }}</div>
+              <div><strong>Midterm:</strong> {{ course.midterm }}</div>
+              <div><strong>Current:</strong> {{ course.current }}</div>
+              
+              {% if course.link and '%' in course.current %}
+                <form class="adv-form" action="/fetch_advanced_report" method="POST">
+                  <input type="hidden" name="username" value="{{ username }}">
+                  <input type="hidden" name="password" value="{{ password }}">
+                  <input type="hidden" name="advanced_url" value="{{ course.link }}">
+                  <button class="adv-button" type="submit">View Detailed Report</button>
+                </form>
+              {% else %}
+                <button class="adv-button-disabled" disabled>TA V4 Coming Soon</button>
+              {% endif %}
+            </li>
+            {% endfor %}
+          </ul>
         </div>
 
-        <!-- Chat section for interaction with Teaching Assistant AI -->
-        <div class="chat-section">
-            <h2 class="chat-header">Chat with Teach Assistant</h2>
+        <h2>Average: {{ average }}%</h2>
+      {% endif %}
 
-            <div class="chat-log" id="chatLog"></div>
-
-            <form class="chat-form" id="chatForm">
-                <input
-                    type="text"
-                    class="chat-input"
-                    id="chatInput"
-                    name="chat_message"
-                    placeholder="Type your question..."
-                    required
-                />
-                <button class="chat-submit" type="submit">Send</button>
-            </form>
-        </div>
+      <div class="back-link">
+        <a href="/">Back to Login</a>
+      </div>
     </div>
 
-    <script>
-        // Get references to chat form elements
-        const chatForm  = document.getElementById('chatForm');
-        const chatLog   = document.getElementById('chatLog');
-        const chatInput = document.getElementById('chatInput');
+    <!-- Chat section for interaction with Teaching Assistant AI -->
+    <div class="chat-section">
+      <h2 class="chat-header">Chat with Teach Assistant</h2>
 
-        // Add submit event listener to handle chat messages
-        chatForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const userMessage = chatInput.value.trim();
-            if (!userMessage) return;
+      <div class="chat-log" id="chatLog"></div>
 
-            // Add user's message to chat log
-            appendMessage("User", userMessage);
-            chatInput.value = "";
+      <form class="chat-form" id="chatForm">
+        <input
+          type="text"
+          class="chat-input"
+          id="chatInput"
+          name="chat_message"
+          placeholder="Type your question..."
+          required
+        />
+        <button class="chat-submit" type="submit">Send</button>
+      </form>
+    </div>
+  </div>
 
-            try {
-                // Send user's message to server via POST /chat endpoint
-                const response = await fetch('/chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ text: userMessage })
-                });
+  <script>
+    // Get references to chat form elements
+    const chatForm  = document.getElementById('chatForm');
+    const chatLog   = document.getElementById('chatLog');
+    const chatInput = document.getElementById('chatInput');
 
-                if (!response.ok) {
-                    throw new Error(`Server error: ${response.status}`);
-                }
+    // Add submit event listener to handle chat messages
+    chatForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const userMessage = chatInput.value.trim();
+      if (!userMessage) return;
 
-                const data = await response.json();
-                // Append assistant's reply to chat log
-                appendMessage("Teach Assistant", data.reply);
+      // Add user's message to chat log
+      appendMessage("User", userMessage);
+      chatInput.value = "";
 
-            } catch (err) {
-                // On error, display system message in chat log
-                appendMessage("System", "Error: " + err.message);
-            }
+      try {
+        // Send user's message to server via POST /chat endpoint
+        const response = await fetch('/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text: userMessage })
         });
 
-        // Function to append a new message to the chat log
-        function appendMessage(sender, message) {
-            const msgDiv = document.createElement('div');
-            msgDiv.classList.add('chat-message');
-
-            // Apply styling based on sender type
-            if (sender === "User") {
-                msgDiv.classList.add('user');
-            } else if (sender === "Teach Assistant") {
-                msgDiv.classList.add('assistant');
-            } else {
-                msgDiv.classList.add('system');
-            }
-
-            msgDiv.innerHTML = `<strong>${sender}:</strong> ${message}`;
-            chatLog.appendChild(msgDiv);
-
-            // Scroll chat log to the bottom
-            chatLog.scrollTop = chatLog.scrollHeight;
+        if (!response.ok) {
+          throw new Error(`Server error: ${response.status}`);
         }
-    </script>
+
+        const data = await response.json();
+        // Append assistant's reply to chat log
+        appendMessage("Teach Assistant", data.reply);
+
+      } catch (err) {
+        // On error, display system message in chat log
+        appendMessage("System", "Error: " + err.message);
+      }
+    });
+
+    // Function to append a new message to the chat log
+    function appendMessage(sender, message) {
+      const msgDiv = document.createElement('div');
+      msgDiv.classList.add('chat-message');
+
+      // Apply styling based on sender type
+      if (sender === "User") {
+        msgDiv.classList.add('user');
+      } else if (sender === "Teach Assistant") {
+        msgDiv.classList.add('assistant');
+      } else {
+        msgDiv.classList.add('system');
+      }
+
+      msgDiv.innerHTML = `<strong>${sender}:</strong> ${message}`;
+      chatLog.appendChild(msgDiv);
+
+      // Scroll chat log to the bottom
+      chatLog.scrollTop = chatLog.scrollHeight;
+    }
+  </script>
 </body>
 </html>
