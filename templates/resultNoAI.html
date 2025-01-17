@@ -1,208 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <!-- Responsive viewport tag -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marks Result</title>
-    <style>
-        /* Reset margins, paddings, and ensure no horizontal overflow */
-        html, body {
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, #ffffff, #f0f0f0);
-            color: #333;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marks Result</title>
+  <style>
+    /* Reset margins, paddings */
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: Arial, sans-serif;
+      background: #fff;      
+      color: #000;     
+    }
 
-        /* Centered headings styling */
-        h1, h2 {
-            text-align: center;
-            margin: 0;
-            padding: 20px 0;
-        }
+    /*  Headings styling */
+    h1, h2 {
+      text-align: center;
+      margin: 0;
+      padding: 20px 0;
+    }
+    h1 {
+      position: relative;
+    }
+    h1::after {
+      content: '';
+      display: block;
+      width: 50%;
+      height: 4px;
+      background-color: #FFD700; 
+      margin: 8px auto 0;
+    }
 
-        /* Styling for error messages */
-        .error {
-            color: #333;
-            text-align: center;
-        }
+    /* Styling for error messages */
+    .error {
+      color: #000;
+      text-align: center;
+    }
 
-        /* Fluid main container */
-        .main-container {
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-            width: 100%;
-            box-sizing: border-box;
-        }
+    /* Fluid main container */
+    .main-container {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+      width: 100%;
+      box-sizing: border-box;
+    }
 
-        /* Fluid content section */
-        .content-section {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            text-align: center;
-            width: 100%;
-            max-width: 600px;
-            box-sizing: border-box;
-        }
+    /* Fluid content section  */
+    .content-section {
+      background-color: #fff;
+      border: 2px solid #000;
+      border-radius: 6px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 100%;
+      max-width: 600px;
+      box-sizing: border-box;
+    }
 
-        /* Header styling for courses section */
-        .courses-header {
-            margin-bottom: 0;
-        }
+    /* Header styling for courses section */
+    .courses-header {
+      margin-bottom: 0;
+    }
 
-        /* Container for courses list */
-        .courses-container {
-            overflow-y: auto;
-            max-height: 600px; 
-            margin-top: 10px;
-        }
+    /* Container for courses list */
+    .courses-container {
+      overflow-y: auto;
+      max-height: 600px; 
+      margin-top: 10px;
+    }
 
-        /* Styling for list of courses */
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            text-align: left;
-            width: 100%;
-            box-sizing: border-box;
-        }
+    /* Styling for list of courses */
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+      width: 100%;
+      box-sizing: border-box;
+    }
 
-        /* Styling for each list item (course) */
-        li {
-            background: #fafafa;
-            margin: 10px 0;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            box-sizing: border-box;
-        }
+    /* Styling for each list item (course) */
+    li {
+      background: #fafafa;
+      margin: 10px 0;
+      padding: 15px;
+      border: 1px solid #000;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
 
-        /* Bold course name styling */
-        .course {
-            font-weight: bold;
-            margin-bottom: 6px;
-        }
+    /* Bold course name styling */
+    .course {
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
 
-        /* Styling for advanced report form */
-        form.adv-form {
-            margin-top: 10px;
-        }
+    /* Styling for advanced report form */
+    form.adv-form {
+      margin-top: 10px;
+    }
 
-        /* Styling for advanced report button */
-        .adv-button {
-            background-color: #28a745;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            padding: 8px 16px;
-            font-size: 0.9em;
-        }
-        .adv-button:hover {
-            background-color: #218838;
-        }
+    /* Styling for advanced report button */
+    .adv-button {
+      background-color: #FFD700;
+      color: #000;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      padding: 8px 16px;
+      font-size: 0.9em;
+      transition: background-color 0.3s;
+    }
+    .adv-button:hover {
+      background-color: #b8860b;
+    }
 
-        /* Styling for disabled advanced report button */
-        .adv-button-disabled {
-            background-color: red;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: not-allowed;
-            padding: 8px 16px;
-            font-size: 0.9em;
-            margin-top: 10px;
-        }
+    /* Styling for disabled advanced report button remains red */
+    .adv-button-disabled {
+      background-color: red;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: not-allowed;
+      padding: 8px 16px;
+      font-size: 0.9em;
+      margin-top: 10px;
+    }
 
-        /* Styling for back link section */
-        .back-link {
-            margin-top: 20px;
-        }
-        .back-link a {
-            color: #007BFF;
-            text-decoration: none;
-            font-size: 0.95em;
-        }
-        .back-link a:hover {
-            text-decoration: underline;
-        }
+    /* Styling for back link section */
+    .back-link {
+      margin-top: 20px;
+    }
+    .back-link a {
+      color: #0000EE; 
+      text-decoration: none;
+      font-size: 0.95em;
+    }
+    .back-link a:hover {
+      text-decoration: underline;
+    }
 
-        @media (max-width: 600px) {
-            h1, h2 {
-                font-size: 1.2em;
-                padding: 10px 0;
-            }
-            .content-section {
-                padding: 10px;
-            }
-            li {
-                padding: 10px;
-                margin: 5px 0;
-            }
-            .adv-button, .adv-button-disabled {
-                padding: 6px 12px;
-                font-size: 0.8em;
-            }
-        }
-    </style>
+    @media (max-width: 600px) {
+      h1, h2 {
+        font-size: 1.2em;
+        padding: 10px 0;
+      }
+      .content-section {
+        padding: 10px;
+      }
+      li {
+        padding: 10px;
+        margin: 5px 0;
+      }
+      .adv-button, .adv-button-disabled {
+        padding: 6px 12px;
+        font-size: 0.8em;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Page heading -->
-    <h1>Mark Results</h1>
+  <!-- Page heading -->
+  <h1>Mark Results</h1>
 
-    <div class="main-container">
-        <div class="content-section">
-            <!-- If there's an error, display error message -->
-            {% if error %}
-                <p class="error">{{ error }}</p>
-            {% else %}
-                <!-- Otherwise display courses list -->
-                <h2 class="courses-header">Your Courses</h2>
-                <div class="courses-container">
-                    <ul>
-                        <!-- Loop through each course and display details -->
-                        {% for course in courses %}
-                        <li>
-                            <div class="course">{{ course.course }}</div>
-                            <div><strong>Midterm:</strong> {{ course.midterm }}</div>
-                            <div><strong>Current:</strong> {{ course.current }}</div>
-                            
-                            {# 
-                              If the current mark has a '%' and the link exists, show the normal button.
-                              Otherwise show the disabled red button.
-                            #}
-                            {% if course.link and '%' in course.current %}
-                                <!-- Form to fetch advanced report for the course -->
-                                <form class="adv-form" action="/fetch_advanced_report" method="POST">
-                                    <input type="hidden" name="username" value="{{ username }}">
-                                    <input type="hidden" name="password" value="{{ password }}">
-                                    <input type="hidden" name="advanced_url" value="{{ course.link }}">
-                                    <button class="adv-button" type="submit">View Detailed Report</button>
-                                </form>
-                            {% else %}
-                                <!-- Disabled button when no detailed report is available -->
-                                <button class="adv-button-disabled" disabled>TA V4 Coming Soon</button>
-                            {% endif %}
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-
-                <!-- Display average mark -->
-                <h2>Average: {{ average }}%</h2>
-            {% endif %}
-
-            <!-- Back to login link -->
-            <div class="back-link">
-                <a href="/">Back to Login</a>
-            </div>
+  <div class="main-container">
+    <div class="content-section">
+      <!-- If there's an error, display error message -->
+      {% if error %}
+        <p class="error">{{ error }}</p>
+      {% else %}
+        <!-- Otherwise display courses list -->
+        <h2 class="courses-header">Your Courses</h2>
+        <div class="courses-container">
+          <ul>
+            <!-- Loop through each course and display details -->
+            {% for course in courses %}
+            <li>
+              <div class="course">{{ course.course }}</div>
+              <div><strong>Midterm:</strong> {{ course.midterm }}</div>
+              <div><strong>Current:</strong> {{ course.current }}</div>
+              
+              {# 
+                If the current mark has a '%' and the link exists, show the normal button.
+                Otherwise show the disabled red button.
+              #}
+              {% if course.link and '%' in course.current %}
+                <!-- Form to fetch advanced report for the course -->
+                <form class="adv-form" action="/fetch_advanced_report" method="POST">
+                  <input type="hidden" name="username" value="{{ username }}">
+                  <input type="hidden" name="password" value="{{ password }}">
+                  <input type="hidden" name="advanced_url" value="{{ course.link }}">
+                  <button class="adv-button" type="submit">View Detailed Report</button>
+                </form>
+              {% else %}
+                <!-- Disabled button when no detailed report is available -->
+                <button class="adv-button-disabled" disabled>TA V4 Coming Soon</button>
+              {% endif %}
+            </li>
+            {% endfor %}
+          </ul>
         </div>
+
+        <!-- Display average mark -->
+        <h2>Average: {{ average }}%</h2>
+      {% endif %}
+
+      <!-- Back to login link -->
+      <div class="back-link">
+        <a href="/">Back to Login</a>
+      </div>
     </div>
+  </div>
 </body>
 </html>
