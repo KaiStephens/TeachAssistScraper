@@ -1,92 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <!-- Add viewport meta tag for responsive behavior -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YRDSB Mark Fetcher</title>
-    <style>
-        /* Basic styling */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        /* Styling for the form */
-        form {
-            max-width: 400px;
-            margin: 40px auto;
-            padding: 20px;
-            background: #fff;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-        }
-        /* Bold text for labels */
-        label {
-            font-weight: bold;
-        }
-        /* Styling for input fields */
-        input {
-            width: 100%;
-            padding: 8px;
-            margin: 10px 0;
-            box-sizing: border-box;
-            font-size: 1em;
-        }
-        /* Styling for the submit button */
-        button {
-            width: 100%;
-            padding: 10px;
-            background: #007BFF;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1em;
-        }
-        /* Hover effect for the button */
-        button:hover {
-            background: #0056b3;
-        }
-        /* Align the heading */
-        h1 {
-            text-align: center;
-            font-size: 1.5em;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YRDSB Mark Fetcher</title>
+  <style>
+    /* Base styling */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #fff; 
+      color: #000;         
+      line-height: 1.6;
+    }
 
-        /* Adjustments for screens less than 600px */
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2em; 
-            }
-            input {
-                font-size: 1.2em;
-                padding: 12px;   
-            }
-            button {
-                font-size: 1.2em;
-                padding: 12px; 
-            }
-        }
-    </style>
+    h1 {
+      text-align: center;
+      font-size: 2em;
+      color: #000;           
+      margin-bottom: 30px;
+    }
+
+    /* Underline heading */
+    h1::after {
+      content: '';
+      display: block;
+      width: 50%;
+      max-width: 400px;       
+      height: 4px;
+      background-color: #FFD700; 
+      margin: 8px auto 0; 
+    }
+
+    /* Form styling */
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #fff;
+      border: 2px solid #000;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    label {
+      font-weight: bold;
+      color: #000;
+      display: block;
+      margin-bottom: 5px;
+      padding-bottom: 2px;
+      border-bottom: 2px solid #FFD700; 
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0 20px;
+      box-sizing: border-box;
+      font-size: 1em;
+      background: #fff;
+      border: 2px solid #000; 
+      border-radius: 4px;
+      color: #000;
+      transition: border-color 0.3s;
+    }
+
+    /* Highlight inputs on focus */
+    input:focus {
+      outline: none;
+      border-color: #FFD700;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #FFD700;
+      color: #000;         
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #d09c1b;  
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.8em;
+      }
+      input,
+      button {
+        font-size: 1.1em;
+        padding: 14px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Page heading -->
-    <h1>YRDSB Mark Fetcher</h1>
-    <!-- Form for user to input credentials and fetch marks -->
-    <form action="/fetch_marks" method="POST">
-        <!-- Username field -->
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
+  <!-- Page heading -->
+  <h1>YRDSB Mark Fetcher</h1>
+  <!-- Form for user to input credentials and fetch marks -->
+  <form action="/fetch_marks" method="POST">
+    <!-- Username field -->
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required />
 
-        <!-- Password field -->
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
+    <!-- Password field -->
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required />
 
-        <!-- Submit button to fetch marks -->
-        <button type="submit">Fetch Marks</button>
-    </form>
+    <!-- Submit button to fetch marks -->
+    <button type="submit">Fetch Marks</button>
+  </form>
 </body>
 </html>
