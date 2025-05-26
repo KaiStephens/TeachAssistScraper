@@ -121,45 +121,59 @@
   <!-- Main heading for the advanced report page -->
   <h1>Advanced Report</h1>
 
-  <div class="accordion-container">
-    <!-- Loop through each assignment item to create sections -->
-    {% for item in assignments %}
-      <!-- Clickable header for each assignment -->
-      <div class="assignment-header" onclick="toggleAccordion(this)">
-        {{ item.name }}
-        {% if item.overall %}
-          - {{ item.overall }}%
-        {% endif %}
-      </div>
-      <!-- Hidden content section for assignment details -->
-      <div class="assignment-content">
-        <table>
-          <thead>
-            <tr>
-              <th>Knowledge</th>
-              <th>Thinking</th>
-              <th>Communication</th>
-              <th>Application</th>
-              <th>Other/Culminating</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{{ item.knowledge }}</td>
-              <td>{{ item.thinking }}</td>
-              <td>{{ item.communication }}</td>
-              <td>{{ item.application }}</td>
-              <td>{{ item.culminating }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    {% endfor %}
-  </div>
+  <!-- Display Error Message -->
+  {% if error %}
+      <p class="error" style="color: red; text-align: center;">{{ error }}</p>
+  {% endif %}
 
-  <!-- Display overall mark if available -->
-  {% if overall %}
-    <p class="overall"><strong>Overall Mark:</strong> {{ overall }}</p>
+  <!-- Conditionally render main content -->
+  {% if not error %}
+      {% if assignments and assignments|length > 0 %}
+      <div class="accordion-container">
+        <!-- Loop through each assignment item to create sections -->
+        {% for item in assignments %}
+          <!-- Clickable header for each assignment -->
+          <div class="assignment-header" onclick="toggleAccordion(this)">
+            {{ item.name }}
+            {% if item.overall %}
+              - {{ item.overall }}%
+            {% endif %}
+          </div>
+          <!-- Hidden content section for assignment details -->
+          <div class="assignment-content">
+            <table>
+              <thead>
+                <tr>
+                  <th>Knowledge</th>
+                  <th>Thinking</th>
+                  <th>Communication</th>
+                  <th>Application</th>
+                  <th>Other/Culminating</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{ item.knowledge }}</td>
+                  <td>{{ item.thinking }}</td>
+                  <td>{{ item.communication }}</td>
+                  <td>{{ item.application }}</td>
+                  <td>{{ item.culminating }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        {% endfor %}
+      </div>
+      {% elif not error %} <!-- Only show "No assignments" if there wasn't a more general error -->
+          <p style="text-align: center;">No assignments found or could not be loaded.</p>
+      {% endif %}
+
+      <!-- Display overall mark if available -->
+      {% if overall %}
+        <p class="overall"><strong>Overall Mark:</strong> {{ overall }}</p>
+      {% elif not error %} <!-- Only show "Overall mark not available" if there wasn't a more general error -->
+        <p class="overall" style="text-align: center;">Overall mark not available.</p>
+      {% endif %}
   {% endif %}
 
   <!-- Back button form to return to classes page -->
